@@ -84,14 +84,6 @@ else()
   message(FATAL_ERROR "OpenRTM version is INVALID.")
 endif()
 
-add_definitions(${OPENRTM_DEFINITIONS})
-include_directories(${OPENRTM_INCLUDE_DIRS})
-link_directories(${OPENRTM_LIBRARY_DIRS})
-
-if(MSVC)
-  add_compile_options(${OPENRTM_CFLAGS})
-endif()
-
 set(IDL_INCLUDE_DIRS ${IDL_INCLUDE_DIRS} ${OPENRTM_INCLUDE_DIRS})
 
 option(USE_BUILTIN_CAMERA_IMAGE_IDL "Enable this option when you run hrpsys-base on Choreonoid" ON)
@@ -114,6 +106,14 @@ else()
   else()
     set(OPENRTM_CAMERA_LIBRARY rtmCamera)
   endif()
+endif()
+
+add_definitions(${OPENRTM_DEFINITIONS})
+include_directories(${OPENRTM_INCLUDE_DIRS})
+link_directories(${OPENRTM_LIBRARY_DIRS})
+
+if(MSVC)
+  add_compile_options(${OPENRTM_CFLAGS})
 endif()
 
 add_subdirectory(src)
